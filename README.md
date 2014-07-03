@@ -1,5 +1,5 @@
 # QuickBlox
-QuickBlox - Communication backed as a Service (CaaS) platform which brings superpowers to mobile apps.
+QuickBlox - Communication & cloud backend (BaaS) platform which brings superpowers to mobile apps.
 
 QuickBlox is a suite of communication features & data services (APIs, SDKs, code samples, admin panel, tutorials) which help digital agencies, mobile developers and publishers to add great functionality to smartphone applications.
 
@@ -8,7 +8,8 @@ Please read full Android SDK documentation on the [QuickBlox website, Android se
 # Q-municate 
 Q-municate is an open source code of chat application with full range of communication features on board (such as messaging, file transfer, push notifications, audio/video calls).
 
-We are inspired to give you chat application out of the box. You can customize this application depending of your needs.
+We are inspired to give you chat application out of the box. 
+You can customize this application depending on your needs.
 As always QuickBlox backend is at your service: http://quickblox.com/plans/
 
 Find the source code and more information about Q-municate in our Developers section: http://quickblox.com/developers/q-municate
@@ -22,16 +23,15 @@ It is a step by step guide designed for all developer levels including beginners
 Q-municate is a fully fledged chat application using the Quickblox API.
 
 ## Q-municate application uses following QuickBlox modules:
-* [Chat (v 2.0.)](http://quickblox.com/modules/chat)
 * [Users](http://quickblox.com/modules/users/)
 * [Content](http://quickblox.com/modules/content/) 
 * [Custom objects](http://quickblox.com/modules/custom/)
-* [Messages](http://quickblox.com/modules/messages)
+* [Chat (v 2.0.)](http://quickblox.com/developers/Chat#Chat_2.0)
 
 ## It includes such features as:
 
-* Two sign-up methods – Facebook and with email/password
-* Login using Facebook account and email/password
+* Two sign-up methods – Facebook and QB (with email)
+* Login using email 
 * Auto search and import of user’s friends with QM accounts with help of friend’s Facebook credentials and email (for the first login)
 * Invite Facebook and QB friends from database (list view)
 * View Friends list
@@ -42,7 +42,7 @@ Q-municate is a fully fledged chat application using the Quickblox API.
 * Participate in Private Chat
 * Participate in Group Chat
 * View list of all active chats with chat history (private chats and group chats)
-* View and edit group chat info (title, logo, add friend or leave a group chat
+* View and edit group chat info (title, logo, add friend or leave a group chat)
 * Allow users to edit their profile (set their own avatar and status (short text message))
 
 Please note all these featureas are available in open source code, so you can customize your app depending on your needs.
@@ -54,7 +54,9 @@ Please note all these featureas are available in open source code, so you can cu
 * The App and Web panel has English language interface.
 * The App works only in Portrait screen mode
 
+
 ## Step by step guide
+
 ### Step 1. PreLogin page
 ![PreLogin page](http://files.quickblox.com/Screenshot_2014-07-03-10-22-18.png) &nbsp;
 
@@ -68,6 +70,7 @@ Please note all these featureas are available in open source code, so you can cu
 
 ###### Please note, that user will skip this page, if “Remember me” tick is set in the check box on Login page.
 
+
 ### Step 2. SignUp page
 ![SignUp page](http://files.quickblox.com/Screenshot_2014-07-03-10-22-30.png) &nbsp;
 
@@ -76,7 +79,6 @@ Sign Up Page allows to create new QM user.
 #### Available features:
 #### Fields set:
 * Full name – text/numeric fields 3 chars min and 50 chars max
-02.07.14	
 (should contain alphanumeric and space characters only), mandatory
 * Email – text/numeric/symbolic fields 3 chars min - no border, mandatory (email symbols validation included)
 * Password – text/numeric/symbolic field 8-40 chars (should contain alphanumeric and punctuation characters only) , mandatory
@@ -88,7 +90,7 @@ Sign Up Page allows to create new QM user.
 Data validation will be done on the server. (Validation process is the same as for Login page) 
 * Back button - redirects user to Prelogin page
 
-When new user is registered in the system , Facebook and email import friends will be done.
+When new user is registered in the system , Facebook and email friends import will be done.
 Remember me tick in the check box on Login page will be set automatically, so there is no need for user to enter credentials during the next login.
 
 #### Please find below how you can do it in code:
@@ -112,10 +114,12 @@ public QBUser signup(QBUser inputUser, File file) throws QBResponseException, Ba
 }
 ```
 
+
 ### Step 3. LogIn page
 ![LogIn page](http://files.quickblox.com/Screenshot_2014-07-03-10-22-42.png) &nbsp;
 
 User can login in the app via Facebook or login as a QuickBlox user.
+
 
 #### 3.1. Connect with Facebook
 
@@ -128,18 +132,16 @@ If user signed up with Facebook, for user’s profile will be used FB avatar ima
 ```java
 public QBUser login(String socialProvider, String accessToken,
   String accessTokenSecret) throws QBResponseException, BaseServiceException {
-  
+  QBUser user;
   QBSession session = QBAuth.createSession();
-  
-  QBUser user = QBUsers.signInUsingSocialProvider(socialProvider, accessToken, accessTokenSecret);
+  user = QBUsers.signInUsingSocialProvider(socialProvider, accessToken, accessTokenSecret);
   user.setPassword(session.getToken());
-  
   String token = QBAuth.getBaseService().getToken();
   AppSession.startSession(LoginType.FACEBOOK, user, token);
-  
   return user;
 }
 ```
+
 
 #### 3.2. LogIn as QuickBlox User
 #### Available features:
@@ -185,6 +187,7 @@ public QBUser login(QBUser inputUser) throws QBResponseException, BaseServiceExc
 }
 ```
 
+
 ### Step 4. Import friends feature.
 
 An app will import all user’s friends by email and Facebook ID after the first app login.
@@ -210,6 +213,7 @@ public void inviteFriend(int userId) throws Exception {
   }
 }
 ```
+
 
 ### Step 5. Friends page
 ![Friends page](http://files.quickblox.com/Screenshot_2014-07-03-10-48-30.png) &nbsp;
@@ -247,9 +251,11 @@ public void inviteFriend(int userId) throws Exception {
 }
 ```
 
+
 #### Step 5.1. Side bar
 ![Side bar](http://files.quickblox.com/Screenshot_2014-07-03-10-46-33.png) &nbsp;
 
+#### Buttons:
 * Friends page (Main page): 
 - A list of friends, listed in alphabetical order.
 
@@ -262,6 +268,7 @@ public void inviteFriend(int userId) throws Exception {
 
 * Settings page:
 - A page with app settings and preferences.
+
 
 #### Step 5.2. Search Bar
 ![Search Bar](http://files.quickblox.com/Screenshot_2014-07-03-11-18-26.png) &nbsp;
@@ -278,6 +285,7 @@ A list of friends, listed in alphabetical order.
 List<QBUser> userList = QBUsers.getUsersByFullName(constraint, requestBuilder, requestParams);
 …
 ```
+
 
 ### Step 6. Details Page
 ![Details Page](http://files.quickblox.com/Screenshot_2014-07-03-10-48-51.png) &nbsp;
@@ -308,6 +316,7 @@ Friends profile page shows user’s information:
 ##### Back:
 - Back button returns to the previous screen (Main page)
  
+
 ### Step 7. Invite Friends
 ![Invite Friends](http://files.quickblox.com/Screenshot_2014-07-03-10-46-06.png) &nbsp;
 
@@ -357,6 +366,7 @@ public void postInviteToWall(Request.Callback requestCallback, String[] selected
 }
 ```
 
+
 ### Step 8. Chats page
 ![Chats page](http://files.quickblox.com/Screenshot_2014-07-03-10-42-41.png) &nbsp; 
 
@@ -386,7 +396,8 @@ public List<QBDialog> getDialogs() throws QBResponseException, XMPPException, Sm
 }
 ```
 
-### Step 8. New chat page
+
+### Step 9. New chat page
 ![New chat page](http://files.quickblox.com/Screenshot_2014-07-03-10-37-55.png) &nbsp; 
 
 New Chat Page allows to create new chat.
@@ -411,7 +422,9 @@ public QBDialog createRoomChat(String roomName,
   return dialog;
 }
 ```
-### Step 9. Private chat page
+
+
+### Step 10. Private chat page
 ![Private chat page](http://files.quickblox.com/Screenshot_2014-07-03-10-44-20.png) &nbsp; 
 
 Private Chat Page is used for messaging with a friend.
@@ -483,7 +496,8 @@ public void sendPrivateMessageWithAttachImage(QBFile file, int userId) throws QB
 }
 ```
 
-### Step 10. Group chat page
+
+### Step 11. Group chat page
 ![Group chat page](http://files.quickblox.com/Screenshot_2014-07-03-10-40-23.png) &nbsp; 
 
 Group Chat Page is used for messaging with friends.
@@ -551,7 +565,8 @@ public void sendGroupMessageWithAttachImage(String roomJidId, QBFile file) throw
 }
 ```
 
-### Step 11. Calls
+
+### Step 12. Calls
 ### Audio call
 ![Audio call page](http://files.quickblox.com/Screenshot_2014-07-03-11-02-37.png) &nbsp; 
 
@@ -603,7 +618,8 @@ private void callToUser(Friend friend, WebRTC.MEDIA_STREAM callType) {
 *** WebRTC.MEDIA_STREAM callType - type of call (WebRTC.MEDIA_STREAM.VIDEO or WebRTC.MEDIA_STREAM.AUDIO)
 ```
 
-### Step 12. Settings Page
+
+### Step 13. Settings Page
 ![Settings page](http://files.quickblox.com/Screenshot_2014-07-03-10-46-47.png) &nbsp;
 
 Settings Page allows user to change his/her profile and change other inapp controls.
@@ -623,7 +639,8 @@ Email –editable field
 * Back button navigates user back to Home Page
 * Possibility to change presence status will be excluded from the settings screen.
 
-### Step 13. Profile Page
+
+### Step 14. Profile Page
 ![Profile page](http://files.quickblox.com/Screenshot_2014-07-03-10-47-43.png) &nbsp;
 
 Profile page allows user to edit his/her profile info.
